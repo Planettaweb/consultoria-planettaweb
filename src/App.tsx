@@ -1,30 +1,26 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Toaster } from '@/components/ui/toaster'
-import { Toaster as Sonner } from '@/components/ui/sonner'
-import { TooltipProvider } from '@/components/ui/tooltip'
-import Index from './pages/Index'
-import NotFound from './pages/NotFound'
-import { Layout } from './components/Layout'
-import CriacaoDeSites from './pages/servicos/CriacaoDeSites'
-import SistemasParaInternet from './pages/servicos/SistemasParaInternet'
-import DataAnalysis from './pages/servicos/DataAnalysis'
+import Index from '@/pages/Index'
+import NotFound from '@/pages/NotFound'
+import ServicePage from '@/pages/ServicePage'
+import { Layout } from '@/components/Layout'
+import { Toaster } from '@/components/ui/sonner'
 
-const App = () => (
-  <BrowserRouter future={{ v7_startTransition: false, v7_relativeSplatPath: false }}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
+export default function App() {
+  return (
+    <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Index />} />
-          <Route path="/servicos/criacao-de-sites" element={<CriacaoDeSites />} />
-          <Route path="/servicos/sistemas-para-internet" element={<SistemasParaInternet />} />
-          <Route path="/servicos/data-analysis-ia-bi" element={<DataAnalysis />} />
+          <Route path="/criacao-de-sites" element={<ServicePage type="criacao-de-sites" />} />
+          <Route
+            path="/sistemas-para-internet"
+            element={<ServicePage type="sistemas-para-internet" />}
+          />
+          <Route path="/data-analysis-ia-bi" element={<ServicePage type="data-analysis-ia-bi" />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
       </Routes>
-    </TooltipProvider>
-  </BrowserRouter>
-)
-
-export default App
+      <Toaster theme="dark" position="top-right" />
+    </BrowserRouter>
+  )
+}
