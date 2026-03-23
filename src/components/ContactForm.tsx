@@ -25,10 +25,10 @@ import {
 } from '@/components/ui/select'
 
 const formSchema = z.object({
-  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  email: z.string().email('E-mail inválido'),
-  phone: z.string().min(10, 'Telefone inválido'),
-  service: z.string().min(1, 'Por favor, selecione um serviço'),
+  name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
+  email: z.string().email('Forneça um endereço de e-mail válido'),
+  phone: z.string().min(10, 'Forneça um número de telefone válido com DDD'),
+  service: z.string().min(1, 'Por favor, selecione um serviço de interesse'),
   message: z.string().optional(),
 })
 
@@ -49,14 +49,19 @@ export function ContactForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
-    // Simulate API call
+
+    // Simulate email dispatch process
     await new Promise((resolve) => setTimeout(resolve, 1500))
+
     setIsSubmitting(false)
 
     toast({
-      title: 'Mensagem enviada com sucesso!',
-      description: 'Nossa equipe entrará em contato em breve.',
+      title: 'Solicitação Enviada com Sucesso!',
+      description:
+        'Sua mensagem foi encaminhada para nossos consultores. Entraremos em contato em breve.',
+      className: 'bg-[#1e3a8a] text-white border-none',
     })
+
     form.reset()
   }
 
@@ -68,15 +73,15 @@ export function ContactForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700">Nome Completo</FormLabel>
+              <FormLabel className="text-slate-700 font-semibold">Nome Completo</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="João da Silva"
-                  className="bg-white border-slate-200"
+                  placeholder="Seu nome completo"
+                  className="bg-white border-slate-200 focus-visible:ring-[#f59e0b]"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 font-medium" />
             </FormItem>
           )}
         />
@@ -87,15 +92,15 @@ export function ContactForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-700">E-mail Corporativo</FormLabel>
+                <FormLabel className="text-slate-700 font-semibold">E-mail</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="joao@empresa.com"
-                    className="bg-white border-slate-200"
+                    placeholder="joao@empresa.com.br"
+                    className="bg-white border-slate-200 focus-visible:ring-[#f59e0b]"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500 font-medium" />
               </FormItem>
             )}
           />
@@ -104,15 +109,15 @@ export function ContactForm() {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-700">Telefone</FormLabel>
+                <FormLabel className="text-slate-700 font-semibold">Telefone / WhatsApp</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="(11) 99999-9999"
-                    className="bg-white border-slate-200"
+                    placeholder="(41) 99999-9999"
+                    className="bg-white border-slate-200 focus-visible:ring-[#f59e0b]"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-500 font-medium" />
               </FormItem>
             )}
           />
@@ -123,11 +128,11 @@ export function ContactForm() {
           name="service"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700">Serviço de Interesse</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormLabel className="text-slate-700 font-semibold">Serviço de Interesse</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
-                  <SelectTrigger className="bg-white border-slate-200">
-                    <SelectValue placeholder="Selecione o serviço ideal" />
+                  <SelectTrigger className="bg-white border-slate-200 focus:ring-[#f59e0b]">
+                    <SelectValue placeholder="Selecione a área principal do seu projeto" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -137,7 +142,7 @@ export function ContactForm() {
                   <SelectItem value="consultoria">Consultoria Geral</SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage />
+              <FormMessage className="text-red-500 font-medium" />
             </FormItem>
           )}
         />
@@ -147,27 +152,31 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700">Mensagem (Opcional)</FormLabel>
+              <FormLabel className="text-slate-700 font-semibold">Mensagem (Opcional)</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Conte um pouco sobre o seu desafio..."
-                  className="bg-white border-slate-200 min-h-[100px]"
+                  placeholder="Conte um pouco mais sobre o seu desafio corporativo..."
+                  className="bg-white border-slate-200 min-h-[100px] focus-visible:ring-[#f59e0b]"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-red-500 font-medium" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full text-white" size="lg" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold h-12 text-lg shadow-md transition-all hover:shadow-lg"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Enviando...
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              Processando Solicitação...
             </>
           ) : (
-            'Solicitar Consultoria Gratuita'
+            'Agende sua Consultoria Gratuita'
           )}
         </Button>
       </form>

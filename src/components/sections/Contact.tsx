@@ -3,7 +3,7 @@ import { ContactForm } from '@/components/ContactForm'
 
 export function Contact() {
   return (
-    <section id="contato" className="py-24 bg-slate-100">
+    <section id="contact" className="py-24 bg-slate-100">
       <div className="container max-w-6xl">
         <div className="grid lg:grid-cols-5 bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
           <div className="lg:col-span-2 p-10 md:p-14 bg-secondary text-white relative overflow-hidden flex flex-col justify-between">
@@ -25,7 +25,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-white mb-1">E-mail</h4>
-                    <p className="text-blue-200">contato@techdados.com</p>
+                    <p className="text-blue-200">contato@planettaweb.com.br</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -33,8 +33,8 @@ export function Contact() {
                     <Phone className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1">Telefone</h4>
-                    <p className="text-blue-200">(11) 99999-9999</p>
+                    <h4 className="font-semibold text-white mb-1">Telefone / WhatsApp</h4>
+                    <p className="text-blue-200">(41) 99635-2036</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -42,11 +42,11 @@ export function Contact() {
                     <MapPin className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white mb-1">Endereço</h4>
+                    <h4 className="font-semibold text-white mb-1">Endereço Base</h4>
                     <p className="text-blue-200 leading-relaxed">
-                      Av. Paulista, 1000 - Bela Vista
+                      Atendimento remoto em todo Brasil
                       <br />
-                      São Paulo - SP, 01310-100
+                      Base de operações: Curitiba - PR
                     </p>
                   </div>
                 </div>

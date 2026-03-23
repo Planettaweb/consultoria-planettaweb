@@ -7,24 +7,24 @@ import {
 
 const faqs = [
   {
-    question: 'Qual o prazo médio de um projeto?',
+    question: 'Como funciona o processo de Criação de Sites?',
     answer:
-      'O prazo varia de acordo com a complexidade. Projetos de sites corporativos levam em média de 3 a 5 semanas. Já integrações complexas de BI ou desenvolvimento de sistemas personalizados podem levar de 2 a 4 meses. Definimos o cronograma exato durante a fase de planejamento.',
+      'Nossa equipe foca em construir plataformas de alta performance. Desenvolvemos desde landing pages otimizadas para conversão até sites corporativos completos, sempre priorizando a melhor experiência do usuário (UX/UI), SEO técnico e responsividade em todos os dispositivos.',
   },
   {
-    question: 'Como é garantida a segurança dos nossos dados?',
+    question: 'Quais tipos de Sistemas para Internet vocês desenvolvem?',
     answer:
-      'Trabalhamos em conformidade com a LGPD e utilizamos as melhores práticas de segurança da informação, incluindo criptografia ponta a ponta, controle de acesso rigoroso e hospedagem em servidores cloud certificados (AWS, Azure ou Google Cloud).',
+      'Criamos soluções sob medida para resolver problemas complexos do seu negócio. Isso inclui painéis administrativos customizados, CRMs, portais B2B/B2C, sistemas de gestão integrados e plataformas SaaS, sempre utilizando arquiteturas robustas e escaláveis.',
   },
   {
-    question: 'A consultoria atende empresas de qual porte?',
+    question: 'Como a área de Data Analysis, IA & BI pode ajudar minha empresa?',
     answer:
-      'Atendemos desde startups em fase de tração até empresas de médio e grande porte que buscam otimizar seus processos através da tecnologia. Nossas soluções são escaláveis e se adaptam à realidade do seu negócio.',
+      'Ajudamos você a tomar decisões baseadas em fatos, não em intuição. Estruturamos pipelines de dados, construímos dashboards interativos em tempo real (como Power BI) e aplicamos modelos preditivos de Inteligência Artificial para identificar tendências de mercado, otimizar custos operacionais e descobrir novas oportunidades de receita.',
   },
   {
-    question: 'Vocês oferecem suporte após a entrega?',
+    question: 'Qual o prazo médio de um projeto de tecnologia?',
     answer:
-      'Sim! Todos os nossos projetos incluem um período de garantia e suporte técnico gratuito pós-lançamento. Além disso, oferecemos planos de manutenção evolutiva para garantir que sua tecnologia acompanhe o crescimento da empresa.',
+      'O prazo varia conforme a complexidade da solução. Projetos focados em presença digital e sites corporativos levam em média de 3 a 5 semanas. Integrações avançadas de dados, desenvolvimento de sistemas web complexos ou projetos de IA podem levar de 2 a 4 meses. O cronograma exato é definido e aprovado com você durante a fase inicial de planejamento.',
   },
 ]
 
@@ -37,7 +37,7 @@ export function FAQ() {
             Perguntas Frequentes
           </h2>
           <p className="text-slate-600 text-lg">
-            Tire suas dúvidas sobre nosso modelo de trabalho e soluções.
+            Tire suas dúvidas sobre nossas áreas de atuação e soluções.
           </p>
         </div>
 
@@ -46,9 +46,9 @@ export function FAQ() {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="border rounded-lg px-6 data-[state=open]:bg-slate-50 data-[state=open]:border-slate-200 transition-colors"
+              className="border rounded-lg px-6 data-[state=open]:bg-slate-50 data-[state=open]:border-slate-200 transition-colors bg-white shadow-sm"
             >
-              <AccordionTrigger className="text-left text-lg font-semibold text-secondary hover:no-underline py-6">
+              <AccordionTrigger className="text-left text-lg font-semibold text-secondary hover:no-underline py-6 hover:text-[#f59e0b] transition-colors">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="text-slate-600 leading-relaxed pb-6 text-base">

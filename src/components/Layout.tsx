@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { WhatsAppButton } from '@/components/WhatsAppButton'
 import logoImg from '@/assets/logo-14b61.png'
 
 export function Layout() {
@@ -38,7 +39,7 @@ export function Layout() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col font-sans selection:bg-[#f59e0b] selection:text-white">
+    <div className="min-h-screen flex flex-col font-sans selection:bg-[#f59e0b] selection:text-white relative">
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled
@@ -156,6 +157,9 @@ export function Layout() {
           </p>
         </div>
       </footer>
+
+      {/* Floating WhatsApp Button */}
+      <WhatsAppButton />
     </div>
   )
 }
