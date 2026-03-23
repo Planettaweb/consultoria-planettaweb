@@ -69,7 +69,7 @@ export function WhyChooseUs() {
             />
             <div className="absolute -bottom-8 -left-8 md:-left-12 bg-secondary text-white p-8 rounded-2xl shadow-xl border border-white/10">
               <div className="flex items-center gap-4">
-                <div className="text-5xl font-extrabold text-primary">10+</div>
+                <div className="text-5xl font-extrabold text-primary">25+</div>
                 <div className="text-sm font-medium leading-tight">
                   Anos de
                   <br />

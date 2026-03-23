@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Monitor, CloudCog, Network, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const services = [
   {
@@ -8,6 +9,7 @@ const services = [
     content:
       'Desenvolvemos landing pages e sites corporativos otimizados para conversão e SEO, focados na melhor experiência do usuário e performance técnica.',
     icon: Monitor,
+    link: '/servicos/criacao-de-sites',
   },
   {
     title: 'Sistemas para Internet',
@@ -15,6 +17,7 @@ const services = [
     content:
       'Engenharia de software focada em resolver problemas complexos. Criamos sistemas web personalizados, painéis administrativos e portais B2B/B2C.',
     icon: CloudCog,
+    link: '/servicos/sistemas-para-internet',
   },
   {
     title: 'Data Analysis, IA & BI',
@@ -22,6 +25,7 @@ const services = [
     content:
       'Estruturação de pipelines de dados, dashboards interativos em tempo real e modelos preditivos com Inteligência Artificial para gerar insights valiosos.',
     icon: Network,
+    link: '/servicos/data-analysis-ia-bi',
   },
 ]
 
@@ -58,13 +62,13 @@ export function Services() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-slate-600 leading-relaxed mb-6">{service.content}</p>
-                  <a
-                    href="#contato"
+                  <Link
+                    to={service.link}
                     className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors"
                   >
                     Saiba Mais{' '}
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+                  </Link>
                 </CardContent>
               </Card>
             )

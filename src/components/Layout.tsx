@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -9,6 +9,8 @@ import logoImg from '@/assets/logo-14b61.png'
 export function Layout() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +19,17 @@ export function Layout() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      setTimeout(() => {
+        const element = document.querySelector(location.hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    }
+  }, [location])
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -29,11 +42,13 @@ export function Layout() {
   const scrollToSection = (href: string) => {
     setIsOpen(false)
     if (href.startsWith('#')) {
-      const element = document.querySelector(href)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      } else if (window.location.pathname !== '/') {
-        window.location.href = '/' + href
+      if (location.pathname !== '/') {
+        navigate('/' + href)
+      } else {
+        const element = document.querySelector(href)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
       }
     }
   }
@@ -158,7 +173,6 @@ export function Layout() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp Button */}
       <WhatsAppButton />
     </div>
   )
