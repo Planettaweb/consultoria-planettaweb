@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
-import { Menu, Database, Linkedin, Twitter, Github } from 'lucide-react'
+import { Link, Outlet } from 'react-router-dom'
+import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from '@/components/ui/sheet'
-import { cn } from '@/lib/utils'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import logoImg from '@/assets/logo-14b61.png'
 
-export default function Layout() {
-  const [scrolled, setScrolled] = useState(false)
+export function Layout() {
+  const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 20)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -19,159 +19,140 @@ export default function Layout() {
 
   const navLinks = [
     { name: 'Home', href: '#home' },
-    { name: 'Serviços', href: '#servicos' },
-    { name: 'Sobre', href: '#sobre' },
+    { name: 'Serviços', href: '#services' },
+    { name: 'Sobre', href: '#about' },
     { name: 'Portfólio', href: '#portfolio' },
-    { name: 'Contato', href: '#contato' },
+    { name: 'Contato', href: '#contact' },
   ]
 
-  return (
-    <div className="flex flex-col min-h-screen">
-      <header
-        className={cn(
-          'fixed top-0 w-full z-50 transition-all duration-300',
-          scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6',
-        )}
-      >
-        <div className="container flex items-center justify-between">
-          <a href="#home" className="flex items-center gap-2">
-            <div className="bg-primary p-2 rounded-lg">
-              <Database className="h-6 w-6 text-white" />
-            </div>
-            <span
-              className={cn(
-                'text-xl font-bold tracking-tight transition-colors',
-                scrolled ? 'text-secondary' : 'text-white',
-              )}
-            >
-              TechDados
-            </span>
-          </a>
+  const scrollToSection = (href: string) => {
+    setIsOpen(false)
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      } else if (window.location.pathname !== '/') {
+        window.location.href = '/' + href
+      }
+    }
+  }
 
+  return (
+    <div className="min-h-screen flex flex-col font-sans selection:bg-[#f59e0b] selection:text-white">
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#1e3a8a] shadow-lg py-3'
+            : 'bg-[#1e3a8a]/95 backdrop-blur-sm border-b border-white/5 py-4 md:py-5'
+        }`}
+      >
+        <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+          <Link
+            to="/"
+            className="flex items-center gap-3 group"
+            onClick={(e) => {
+              if (window.location.pathname === '/') {
+                e.preventDefault()
+                scrollToSection('#home')
+              }
+            }}
+          >
+            <div className="bg-white rounded-full p-1 shadow-sm transition-transform duration-300 group-hover:scale-105">
+              <img
+                src={logoImg}
+                alt="Planettaweb Logo"
+                className="h-8 w-8 md:h-10 md:w-10 object-contain"
+              />
+            </div>
+            <span className="text-xl md:text-2xl font-bold text-white tracking-tight group-hover:text-[#f59e0b] transition-colors">
+              Planettaweb
+            </span>
+          </Link>
+
+          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                className={cn(
-                  'text-sm font-medium hover:text-primary transition-colors',
-                  scrolled ? 'text-slate-600' : 'text-white/90',
-                )}
+                onClick={() => scrollToSection(link.href)}
+                className="text-sm font-medium text-slate-200 hover:text-[#f59e0b] transition-colors"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
-            <Button asChild className="bg-primary hover:bg-primary/90 text-white">
-              <a href="#contato">Fale Conosco</a>
+            <Button
+              className="bg-[#f59e0b] hover:bg-[#d97706] text-white font-semibold border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all rounded-full px-6"
+              onClick={() => scrollToSection('#contact')}
+            >
+              Solicitar Consultoria
             </Button>
           </nav>
 
+          {/* Mobile Nav */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(scrolled ? 'text-slate-800' : 'text-white')}
-              >
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Menu</span>
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+                <Menu className="h-7 w-7" />
+                <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <SheetHeader>
-                <SheetTitle className="text-left flex items-center gap-2">
-                  <Database className="h-5 w-5 text-primary" /> TechDados
-                </SheetTitle>
-              </SheetHeader>
-              <div className="flex flex-col gap-6 mt-8">
+            <SheetContent
+              side="right"
+              className="bg-[#1e3a8a] border-l-[#1e3a8a]/80 text-white p-6 w-[80vw] sm:max-w-sm"
+            >
+              <div className="flex flex-col gap-8 mt-12">
                 {navLinks.map((link) => (
-                  <a
+                  <button
                     key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="text-lg font-medium text-slate-800 hover:text-primary transition-colors"
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-xl font-medium text-left text-slate-200 hover:text-[#f59e0b] hover:translate-x-1 transition-all"
                   >
                     {link.name}
-                  </a>
+                  </button>
                 ))}
-                <Button asChild className="mt-4 w-full">
-                  <a href="#contato" onClick={() => setIsOpen(false)}>
-                    Fale Conosco
-                  </a>
-                </Button>
+                <div className="mt-4 pt-8 border-t border-white/10">
+                  <Button
+                    className="bg-[#f59e0b] hover:bg-[#d97706] text-white w-full border-none h-12 text-lg rounded-full"
+                    onClick={() => scrollToSection('#contact')}
+                  >
+                    Solicitar Consultoria
+                  </Button>
+                </div>
               </div>
             </SheetContent>
           </Sheet>
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-grow">
         <Outlet />
       </main>
 
-      <footer className="bg-slate-950 text-slate-300 py-12 border-t border-slate-900">
-        <div className="container grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Database className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold text-white tracking-tight">TechDados</span>
+      <footer className="bg-[#0f172a] text-white py-12 border-t border-white/5">
+        <div className="container mx-auto px-4 md:px-6 flex flex-col items-center text-center">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="bg-white rounded-full p-1.5">
+              <img src={logoImg} alt="Planettaweb Logo" className="h-8 w-8 object-contain" />
             </div>
-            <p className="text-sm text-slate-400">
-              Transformando dados em resultados tangíveis para o seu negócio através de tecnologia
-              de ponta.
-            </p>
+            <span className="text-2xl font-bold tracking-tight">Planettaweb</span>
           </div>
-          <div>
-            <h3 className="font-semibold text-white mb-4">Links Rápidos</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#servicos" className="hover:text-primary transition-colors">
-                  Serviços
-                </a>
-              </li>
-              <li>
-                <a href="#sobre" className="hover:text-primary transition-colors">
-                  Sobre Nós
-                </a>
-              </li>
-              <li>
-                <a href="#portfolio" className="hover:text-primary transition-colors">
-                  Portfólio
-                </a>
-              </li>
-              <li>
-                <a href="#contato" className="hover:text-primary transition-colors">
-                  Contato
-                </a>
-              </li>
-            </ul>
+          <p className="text-slate-400 max-w-md mb-8 leading-relaxed">
+            Transformando dados em resultados tangíveis. Soluções completas em tecnologia e
+            consultoria estratégica para impulsionar seu negócio.
+          </p>
+          <div className="flex gap-4 mb-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.href)}
+                className="text-sm text-slate-500 hover:text-[#f59e0b] transition-colors"
+              >
+                {link.name}
+              </button>
+            ))}
           </div>
-          <div>
-            <h3 className="font-semibold text-white mb-4">Contato</h3>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li>contato@techdados.com</li>
-              <li>(11) 99999-9999</li>
-              <li>Av. Paulista, 1000 - SP</li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold text-white mb-4">Redes Sociais</h3>
-            <div className="flex gap-4">
-              <a href="#" className="hover:text-primary transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-primary transition-colors">
-                <Github className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="container mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-500">
-          <p>
-            &copy; {new Date().getFullYear()} TechDados Consultoria. Todos os direitos reservados.
+          <p className="text-sm text-slate-600">
+            © {new Date().getFullYear()} Planettaweb. Todos os direitos reservados.
           </p>
         </div>
       </footer>
