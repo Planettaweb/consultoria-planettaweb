@@ -7,54 +7,51 @@ import {
 
 const faqs = [
   {
-    question: 'Quanto tempo demora para desenvolver um site ou sistema?',
+    question: 'Como funciona o processo de Criação de Sites?',
     answer:
-      'O tempo de desenvolvimento varia de acordo com a complexidade do projeto. Sites institucionais levam em média de 2 a 4 semanas, enquanto sistemas complexos podem levar de 2 a 6 meses. Após o escopo definido, fornecemos um cronograma detalhado e entregas em etapas.',
+      'Nossa equipe foca em construir plataformas de alta performance. Desenvolvemos desde landing pages otimizadas para conversão até sites corporativos completos, sempre priorizando a melhor experiência do usuário (UX/UI), SEO técnico e responsividade em todos os dispositivos.',
   },
   {
-    question: 'Vocês oferecem suporte após a entrega do projeto?',
+    question: 'Quais tipos de Sistemas para Internet vocês desenvolvem?',
     answer:
-      'Sim! A Planettaweb oferece pacotes de suporte e manutenção contínua para garantir que seu site ou sistema continue operando com máxima performance, segurança e sempre atualizado após o lançamento.',
+      'Criamos soluções sob medida para resolver problemas complexos do seu negócio. Isso inclui painéis administrativos customizados, CRMs, portais B2B/B2C, sistemas de gestão integrados e plataformas SaaS, sempre utilizando arquiteturas robustas e escaláveis.',
   },
   {
-    question: 'Como funciona o desenvolvimento de BI e Análise de Dados?',
+    question: 'Como a área de Data Analysis, IA & BI pode ajudar minha empresa?',
     answer:
-      'Nossa consultoria de dados conecta e consolida suas fontes de dados, cria modelagens precisas e desenvolve painéis interativos (Dashboards em Power BI ou ferramentas customizadas) para que você possa tomar decisões baseadas em dados em tempo real.',
+      'Ajudamos você a tomar decisões baseadas em fatos, não em intuição. Estruturamos pipelines de dados, construímos dashboards interativos em tempo real (como Power BI) e aplicamos modelos preditivos de Inteligência Artificial para identificar tendências de mercado, otimizar custos operacionais e descobrir novas oportunidades de receita.',
   },
   {
-    question: 'Os sites desenvolvidos são otimizados para o Google (SEO)?',
+    question: 'Qual o prazo médio de um projeto de tecnologia?',
     answer:
-      'Absolutamente. Todos os nossos projetos web são desenvolvidos seguindo as melhores práticas de SEO técnico, performance avançada (Core Web Vitals) e responsividade, garantindo uma base sólida para um bom ranqueamento orgânico.',
-  },
-  {
-    question: 'Vocês trabalham com metodologias ágeis?',
-    answer:
-      'Sim, utilizamos metodologias ágeis (como Scrum e Kanban) integradas ao nosso fluxo de trabalho para garantir entregas incrementais de valor, maior transparência e flexibilidade para adaptações durante o desenvolvimento.',
+      'O prazo varia conforme a complexidade da solução. Projetos focados em presença digital e sites corporativos levam em média de 3 a 5 semanas. Integrações avançadas de dados, desenvolvimento de sistemas web complexos ou projetos de IA podem levar de 2 a 4 meses. O cronograma exato é definido e aprovado com você durante a fase inicial de planejamento.',
   },
 ]
 
 export function FAQ() {
   return (
-    <section className="py-24 bg-[#0a0f1c]" id="faq">
-      <div className="container px-4 md:px-6 max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Perguntas Frequentes</h2>
-          <p className="text-lg text-gray-400">
-            Tire suas dúvidas sobre nossos serviços, metodologia e processo de trabalho.
+    <section className="py-16 md:py-24 bg-white">
+      <div className="container px-4 md:px-6 max-w-4xl">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-4 tracking-tight">
+            Perguntas Frequentes
+          </h2>
+          <p className="text-slate-600 text-base md:text-lg">
+            Tire suas dúvidas sobre nossas áreas de atuação e soluções.
           </p>
         </div>
 
-        <Accordion type="single" collapsible className="w-full space-y-4">
+        <Accordion type="single" collapsible className="w-full space-y-3 md:space-y-4">
           {faqs.map((faq, index) => (
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="bg-[#0f172a] border border-gray-800/50 rounded-xl px-6 data-[state=open]:border-orange-500/50 data-[state=open]:bg-[#0f172a]/80 transition-all duration-300"
+              className="border rounded-lg px-4 md:px-6 data-[state=open]:bg-slate-50 data-[state=open]:border-slate-200 transition-colors bg-white shadow-sm"
             >
-              <AccordionTrigger className="text-left text-white hover:text-orange-400 py-6 text-lg font-medium hover:no-underline">
+              <AccordionTrigger className="text-left text-base md:text-lg font-semibold text-secondary hover:no-underline py-4 md:py-6 hover:text-[#f59e0b] transition-colors gap-4">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-gray-400 text-base leading-relaxed pb-6">
+              <AccordionContent className="text-slate-600 leading-relaxed pb-4 md:pb-6 text-sm md:text-base">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

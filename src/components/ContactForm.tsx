@@ -27,7 +27,7 @@ import {
 const formSchema = z.object({
   name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
   email: z.string().email('Forneça um endereço de e-mail válido'),
-  phone: z.string().min(10, 'Forneça um número de telefone válido com DDD'),
+  phone: z.string().min(10, 'Forneça um número de telefone válido'),
   service: z.string().min(1, 'Por favor, selecione um serviço de interesse'),
   message: z.string().optional(),
 })
@@ -67,40 +67,45 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 md:space-y-6">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700 font-semibold">Nome Completo</FormLabel>
+              <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
+                Nome Completo
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Seu nome completo"
-                  className="bg-white border-slate-200 focus-visible:ring-[#f59e0b]"
+                  className="bg-white border-slate-200 focus-visible:ring-[#f59e0b] h-11 md:h-10"
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="text-red-500 font-medium" />
+              <FormMessage className="text-red-500 font-medium text-xs" />
             </FormItem>
           )}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-700 font-semibold">E-mail</FormLabel>
+                <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
+                  E-mail
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="joao@empresa.com.br"
-                    className="bg-white border-slate-200 focus-visible:ring-[#f59e0b]"
+                    type="email"
+                    className="bg-white border-slate-200 focus-visible:ring-[#f59e0b] h-11 md:h-10"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-500 font-medium" />
+                <FormMessage className="text-red-500 font-medium text-xs" />
               </FormItem>
             )}
           />
@@ -109,15 +114,18 @@ export function ContactForm() {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-slate-700 font-semibold">Telefone / WhatsApp</FormLabel>
+                <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
+                  Telefone / WhatsApp
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="(41) 99999-9999"
-                    className="bg-white border-slate-200 focus-visible:ring-[#f59e0b]"
+                    type="tel"
+                    className="bg-white border-slate-200 focus-visible:ring-[#f59e0b] h-11 md:h-10"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-500 font-medium" />
+                <FormMessage className="text-red-500 font-medium text-xs" />
               </FormItem>
             )}
           />
@@ -128,11 +136,13 @@ export function ContactForm() {
           name="service"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700 font-semibold">Serviço de Interesse</FormLabel>
+              <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
+                Serviço de Interesse
+              </FormLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <FormControl>
-                  <SelectTrigger className="bg-white border-slate-200 focus:ring-[#f59e0b]">
-                    <SelectValue placeholder="Selecione a área principal do seu projeto" />
+                  <SelectTrigger className="bg-white border-slate-200 focus:ring-[#f59e0b] h-11 md:h-10">
+                    <SelectValue placeholder="Selecione a área principal" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -142,7 +152,7 @@ export function ContactForm() {
                   <SelectItem value="consultoria">Consultoria Geral</SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage className="text-red-500 font-medium" />
+              <FormMessage className="text-red-500 font-medium text-xs" />
             </FormItem>
           )}
         />
@@ -152,22 +162,24 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-slate-700 font-semibold">Mensagem (Opcional)</FormLabel>
+              <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
+                Mensagem (Opcional)
+              </FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Conte um pouco mais sobre o seu desafio corporativo..."
-                  className="bg-white border-slate-200 min-h-[100px] focus-visible:ring-[#f59e0b]"
+                  className="bg-white border-slate-200 min-h-[120px] focus-visible:ring-[#f59e0b] resize-y"
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="text-red-500 font-medium" />
+              <FormMessage className="text-red-500 font-medium text-xs" />
             </FormItem>
           )}
         />
 
         <Button
           type="submit"
-          className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold h-12 text-lg shadow-md transition-all hover:shadow-lg"
+          className="w-full bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold h-12 md:h-14 text-base md:text-lg shadow-md transition-all hover:shadow-lg mt-2"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -176,7 +188,7 @@ export function ContactForm() {
               Processando Solicitação...
             </>
           ) : (
-            'Agende sua Consultoria Gratuita'
+            'Agende sua Consultoria'
           )}
         </Button>
       </form>
