@@ -100,7 +100,7 @@ export default function CriacaoDeSites() {
                 size="lg"
                 className="bg-[#f59e0b] hover:bg-[#d97706] text-white font-bold px-6 md:px-8 h-12 md:h-14 rounded-full w-full sm:w-auto"
               >
-                <Link to="/#contact">Solicitar Orçamento</Link>
+                <Link to="/#contato">Entre em contato</Link>
               </Button>
             </div>
           </div>

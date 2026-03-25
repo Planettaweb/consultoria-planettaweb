@@ -67,10 +67,10 @@ export function Hero() {
         >
           <Button
             size="lg"
-            onClick={() => scrollToSection('#contact')}
+            onClick={() => scrollToSection('#contato')}
             className="bg-[#f59e0b] hover:bg-[#d97706] text-white border-none h-12 md:h-14 px-6 md:px-8 text-base md:text-lg font-bold shadow-[0_0_30px_rgba(245,158,11,0.3)] hover:shadow-[0_0_40px_rgba(245,158,11,0.5)] transition-all duration-300 hover:-translate-y-1 rounded-full group w-full sm:w-auto"
           >
-            Solicitar Consultoria
+            Entre em contato
             <ArrowRight className="ml-2 h-5 w-5 md:h-6 md:w-6 group-hover:translate-x-1 transition-transform" />
           </Button>
           <Button

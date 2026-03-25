@@ -70,12 +70,10 @@ export function WhyChooseUs() {
             <div className="absolute -bottom-6 left-4 right-4 sm:right-auto md:-left-4 lg:-left-12 lg:-bottom-8 bg-secondary text-white p-6 md:p-8 rounded-2xl shadow-xl border border-white/10 z-10">
               <div className="flex items-center justify-center sm:justify-start gap-4">
                 <div className="text-4xl md:text-5xl font-extrabold text-primary">25+</div>
-                <div className="text-xs md:text-sm font-medium leading-tight">
-                  Anos de
+                <div className="text-sm md:text-base font-medium leading-tight">
+                  anos de
                   <br />
-                  Experiência
-                  <br />
-                  no Mercado
+                  experiência
                 </div>
               </div>
             </div>

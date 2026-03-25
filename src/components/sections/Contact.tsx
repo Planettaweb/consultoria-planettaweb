@@ -3,7 +3,7 @@ import { ContactForm } from '@/components/ContactForm'
 
 export function Contact() {
   return (
-    <section id="contact" className="py-16 md:py-24 bg-slate-100">
+    <section id="contato" className="py-16 md:py-24 bg-slate-100">
       <div className="container px-4 md:px-6 max-w-6xl">
         <div className="grid lg:grid-cols-5 bg-white rounded-2xl md:rounded-3xl shadow-xl overflow-hidden border border-slate-100 mx-0">
           <div className="lg:col-span-2 p-8 md:p-10 lg:p-14 bg-secondary text-white relative overflow-hidden flex flex-col justify-between">
@@ -11,7 +11,7 @@ export function Contact() {
 
             <div className="relative z-10">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 tracking-tight">
-                Agende sua Consultoria Gratuita
+                Entre em contato
               </h2>
               <p className="text-blue-100 text-base md:text-lg mb-8 md:mb-12 leading-relaxed">
                 Dê o primeiro passo para transformar os dados da sua empresa em resultados reais.

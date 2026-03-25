@@ -32,11 +32,11 @@ export function Layout() {
   }, [location])
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Serviços', href: '#services' },
-    { name: 'Sobre', href: '#about' },
+    { name: 'Início', href: '#home' },
+    { name: 'Serviços', href: '#servicos' },
+    { name: 'Sobre', href: '#sobre' },
     { name: 'Portfólio', href: '#portfolio' },
-    { name: 'Contato', href: '#contact' },
+    { name: 'Contato', href: '#contato' },
   ]
 
   const scrollToSection = (href: string) => {
@@ -98,9 +98,9 @@ export function Layout() {
             ))}
             <Button
               className="bg-[#f59e0b] hover:bg-[#d97706] text-white font-semibold border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all rounded-full px-6"
-              onClick={() => scrollToSection('#contact')}
+              onClick={() => scrollToSection('#contato')}
             >
-              Solicitar Consultoria
+              Entre em contato
             </Button>
           </nav>
 
@@ -109,7 +109,7 @@ export function Layout() {
             <SheetTrigger asChild className="lg:hidden">
               <Button variant="ghost" size="icon" className="text-white hover:bg-white/10 shrink-0">
                 <Menu className="h-6 w-6 sm:h-7 sm:w-7" />
-                <span className="sr-only">Toggle menu</span>
+                <span className="sr-only">Menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent
@@ -129,9 +129,9 @@ export function Layout() {
                 <div className="mt-4 pt-8 border-t border-white/10">
                   <Button
                     className="bg-[#f59e0b] hover:bg-[#d97706] text-white w-full border-none h-12 text-lg rounded-full"
-                    onClick={() => scrollToSection('#contact')}
+                    onClick={() => scrollToSection('#contato')}
                   >
-                    Solicitar Consultoria
+                    Entre em contato
                   </Button>
                 </div>
               </div>

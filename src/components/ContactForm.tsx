@@ -16,20 +16,12 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 
 const formSchema = z.object({
   name: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres'),
   email: z.string().email('Forneça um endereço de e-mail válido'),
-  phone: z.string().min(10, 'Forneça um número de telefone válido'),
-  service: z.string().min(1, 'Por favor, selecione um serviço de interesse'),
-  message: z.string().optional(),
+  subject: z.string().min(2, 'Por favor, informe o assunto'),
+  message: z.string().min(10, 'A mensagem deve ter pelo menos 10 caracteres'),
 })
 
 export function ContactForm() {
@@ -41,8 +33,7 @@ export function ContactForm() {
     defaultValues: {
       name: '',
       email: '',
-      phone: '',
-      service: '',
+      subject: '',
       message: '',
     },
   })
@@ -56,9 +47,8 @@ export function ContactForm() {
     setIsSubmitting(false)
 
     toast({
-      title: 'Solicitação Enviada com Sucesso!',
-      description:
-        'Sua mensagem foi encaminhada para nossos consultores. Entraremos em contato em breve.',
+      title: 'Mensagem Enviada com Sucesso!',
+      description: 'Sua mensagem foi encaminhada. Entraremos em contato em breve.',
       className: 'bg-[#1e3a8a] text-white border-none',
     })
 
@@ -74,7 +64,7 @@ export function ContactForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
-                Nome Completo
+                Nome
               </FormLabel>
               <FormControl>
                 <Input
@@ -99,7 +89,7 @@ export function ContactForm() {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="joao@empresa.com.br"
+                    placeholder="seu@email.com.br"
                     type="email"
                     className="bg-white border-slate-200 focus-visible:ring-[#f59e0b] h-11 md:h-10"
                     {...field}
@@ -111,16 +101,15 @@ export function ContactForm() {
           />
           <FormField
             control={form.control}
-            name="phone"
+            name="subject"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
-                  Telefone / WhatsApp
+                  Assunto
                 </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="(41) 99999-9999"
-                    type="tel"
+                    placeholder="Qual o assunto do seu contato?"
                     className="bg-white border-slate-200 focus-visible:ring-[#f59e0b] h-11 md:h-10"
                     {...field}
                   />
@@ -133,41 +122,15 @@ export function ContactForm() {
 
         <FormField
           control={form.control}
-          name="service"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
-                Serviço de Interesse
-              </FormLabel>
-              <Select onValueChange={field.onChange} value={field.value}>
-                <FormControl>
-                  <SelectTrigger className="bg-white border-slate-200 focus:ring-[#f59e0b] h-11 md:h-10">
-                    <SelectValue placeholder="Selecione a área principal" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="web">Criação de Sites</SelectItem>
-                  <SelectItem value="sistemas">Sistemas para Internet</SelectItem>
-                  <SelectItem value="dados">Data Analysis, IA & BI</SelectItem>
-                  <SelectItem value="consultoria">Consultoria Geral</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage className="text-red-500 font-medium text-xs" />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name="message"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-slate-700 font-semibold text-sm md:text-base">
-                Mensagem (Opcional)
+                Mensagem
               </FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Conte um pouco mais sobre o seu desafio corporativo..."
+                  placeholder="Como podemos ajudar?"
                   className="bg-white border-slate-200 min-h-[120px] focus-visible:ring-[#f59e0b] resize-y"
                   {...field}
                 />
@@ -185,10 +148,10 @@ export function ContactForm() {
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Processando Solicitação...
+              Enviando...
             </>
           ) : (
-            'Agende sua Consultoria'
+            'Enviar'
           )}
         </Button>
       </form>
