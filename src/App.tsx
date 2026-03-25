@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Index from '@/pages/Index'
 import NotFound from '@/pages/NotFound'
-import ServicePage from '@/pages/ServicePage'
+import CriacaoDeSites from '@/pages/servicos/CriacaoDeSites'
+import SistemasParaInternet from '@/pages/servicos/SistemasParaInternet'
+import DataAnalysis from '@/pages/servicos/DataAnalysis'
 import { Layout } from '@/components/Layout'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -11,12 +13,9 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Index />} />
-          <Route path="/criacao-de-sites" element={<ServicePage type="criacao-de-sites" />} />
-          <Route
-            path="/sistemas-para-internet"
-            element={<ServicePage type="sistemas-para-internet" />}
-          />
-          <Route path="/data-analysis-ia-bi" element={<ServicePage type="data-analysis-ia-bi" />} />
+          <Route path="/servicos/criacao-de-sites" element={<CriacaoDeSites />} />
+          <Route path="/servicos/sistemas-para-internet" element={<SistemasParaInternet />} />
+          <Route path="/servicos/data-analysis-ia-bi" element={<DataAnalysis />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
