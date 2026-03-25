@@ -1,83 +1,96 @@
-import { Target, TrendingUp, Users, Cpu } from 'lucide-react'
+import { CheckCircle2, TrendingUp, Users, Zap } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
 
-const features = [
+const reasons = [
   {
-    title: 'Expertise e Foco',
-    description: 'Equipe de especialistas sêniores com vivência real de mercado.',
-    icon: Target,
+    icon: <TrendingUp className="h-6 w-6 text-orange-500" />,
+    title: 'Mais de 25 Anos de Experiência',
+    description:
+      'Duas décadas e meia transformando a presença digital de empresas com tecnologia de ponta.',
   },
   {
-    title: 'Resultados Mensuráveis',
-    description: 'Foco absoluto no retorno sobre investimento (ROI) e métricas claras.',
-    icon: TrendingUp,
+    icon: <Users className="h-6 w-6 text-orange-500" />,
+    title: 'Equipe Especializada',
+    description:
+      'Profissionais altamente capacitados em desenvolvimento web, sistemas e análise de dados.',
   },
   {
-    title: 'Atendimento Personalizado',
-    description: 'Mergulhamos no seu negócio para criar soluções sob medida.',
-    icon: Users,
+    icon: <Zap className="h-6 w-6 text-orange-500" />,
+    title: 'Resultados Rápidos',
+    description:
+      'Metodologias ágeis que garantem entregas de valor em menor tempo de desenvolvimento.',
   },
   {
-    title: 'Tecnologia Moderna',
-    description: 'Utilização do que há de mais avançado em cloud e frameworks web.',
-    icon: Cpu,
+    icon: <CheckCircle2 className="h-6 w-6 text-orange-500" />,
+    title: 'Qualidade Comprovada',
+    description:
+      'Centenas de projetos entregues com os mais altos padrões de qualidade e segurança do mercado.',
   },
 ]
 
 export function WhyChooseUs() {
   return (
-    <section id="sobre" className="py-24 bg-white">
-      <div className="container">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-secondary mb-6 tracking-tight">
-              Por que escolher nossa consultoria?
-            </h2>
-            <p className="text-slate-600 text-lg mb-10 leading-relaxed">
-              Nossa abordagem combina profunda expertise técnica com visão estratégica de negócios.
-              Não entregamos apenas código; entregamos soluções que geram impacto real e sustentável
-              para a sua operação.
-            </p>
+    <section className="py-24 bg-[#0a0f1c] relative overflow-hidden" id="sobre">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
-            <div className="grid sm:grid-cols-2 gap-8">
-              {features.map((feature, index) => {
-                const Icon = feature.icon
-                return (
-                  <div key={index} className="flex gap-4">
-                    <div className="shrink-0 mt-1">
-                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Icon className="h-5 w-5 text-primary" />
-                      </div>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-secondary mb-2">{feature.title}</h4>
-                      <p className="text-slate-600 text-sm leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
+      <div className="container relative z-10 px-4 md:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Por Que Nos Escolher</h2>
+          <p className="text-lg text-gray-400 leading-relaxed">
+            A Planettaweb combina experiência técnica com visão de negócios para entregar soluções
+            que realmente impactam seus resultados e aceleram sua transformação digital.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {reasons.map((reason, index) => (
+            <Card
+              key={index}
+              className="bg-[#0f172a]/50 border-gray-800/50 backdrop-blur-sm hover:border-orange-500/30 transition-all duration-300 group"
+            >
+              <CardContent className="p-6">
+                <div className="mb-6 p-4 rounded-xl bg-[#1e293b] inline-block group-hover:scale-110 group-hover:bg-blue-900/20 transition-all duration-300">
+                  {reason.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">{reason.title}</h3>
+                <p className="text-gray-400 leading-relaxed text-sm">{reason.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 py-10 border-y border-gray-800/50 bg-[#0f172a]/30 rounded-3xl backdrop-blur-sm">
+          <div className="text-center space-y-2">
+            <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-orange-500">
+              25+
+            </div>
+            <div className="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">
+              Anos de Mercado
             </div>
           </div>
-
-          <div className="relative">
-            <div className="absolute inset-0 bg-secondary/5 rounded-[2rem] transform rotate-3 scale-105"></div>
-            <img
-              src="https://img.usecurling.com/p/800/800?q=teamwork&color=blue&dpr=2"
-              alt="Equipe trabalhando"
-              className="relative rounded-[2rem] shadow-2xl object-cover w-full aspect-square"
-            />
-            <div className="absolute -bottom-8 -left-8 md:-left-12 bg-secondary text-white p-8 rounded-2xl shadow-xl border border-white/10">
-              <div className="flex items-center gap-4">
-                <div className="text-5xl font-extrabold text-primary">25+</div>
-                <div className="text-sm font-medium leading-tight">
-                  Anos de
-                  <br />
-                  Experiência
-                  <br />
-                  no Mercado
-                </div>
-              </div>
+          <div className="text-center space-y-2">
+            <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-orange-500">
+              500+
+            </div>
+            <div className="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">
+              Projetos Entregues
+            </div>
+          </div>
+          <div className="text-center space-y-2">
+            <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-orange-500">
+              98%
+            </div>
+            <div className="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">
+              Clientes Satisfeitos
+            </div>
+          </div>
+          <div className="text-center space-y-2">
+            <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-orange-500">
+              24/7
+            </div>
+            <div className="text-sm md:text-base text-gray-400 font-medium uppercase tracking-wider">
+              Suporte Técnico
             </div>
           </div>
         </div>
