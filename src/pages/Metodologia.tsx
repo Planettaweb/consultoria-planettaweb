@@ -1,278 +1,372 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   BrainCircuit,
-  Sparkles,
   Activity,
-  Search,
-  Wrench,
+  Workflow,
+  Target,
   Database,
-  Laptop,
-  Lightbulb,
+  Code2,
+  LineChart,
   PieChart,
+  Bot,
+  ArrowDown,
+  Sparkles,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
-const steps = [
+const stepsData = [
   {
     id: 1,
     title: 'Diagnóstico da dor',
-    desc: 'Diagnóstico da dor, para entender o que o cliente mais precisa.',
+    desc: 'Entendemos a causa real do problema para atacar o que realmente trava o crescimento.',
+    pos: { x: 15, y: 25 },
     icon: Activity,
-    color: 'text-rose-400',
-    bg: 'bg-rose-400/10',
-    border: 'border-rose-400/30',
   },
   {
     id: 2,
-    title: 'Análise dos processos',
-    desc: 'Análise dos processos que precisam melhorar.',
-    icon: Search,
-    color: 'text-orange-400',
-    bg: 'bg-orange-400/10',
-    border: 'border-orange-400/30',
+    title: 'Análise dos processos que precisam melhorar',
+    desc: 'Mapeamos gargalos e ineficiências para transformar operação lenta em fluxo inteligente.',
+    pos: { x: 35, y: 12 },
+    icon: Workflow,
   },
   {
     id: 3,
-    title: 'Serviço personalizado',
-    desc: 'Identificação do serviço personalizado.',
-    icon: Wrench,
-    color: 'text-amber-400',
-    bg: 'bg-amber-400/10',
-    border: 'border-amber-400/30',
+    title: 'Identificação do serviço personalizado',
+    desc: 'Definimos a solução sob medida para gerar impacto rápido e aderente ao seu negócio.',
+    pos: { x: 15, y: 75 },
+    icon: Target,
   },
   {
     id: 4,
-    title: 'Engenharia de dados',
-    desc: 'Engenharia de dados e Analytics Engineer para definir a arquitetura de dados.',
+    title: 'Engenharia de dados e Analytics Engineer',
+    desc: 'Estruturaram dados confiáveis para sustentar decisões mais seguras, rápidas e estratégicas.',
+    pos: { x: 65, y: 12 },
     icon: Database,
-    color: 'text-emerald-400',
-    bg: 'bg-emerald-400/10',
-    border: 'border-emerald-400/30',
   },
   {
     id: 5,
-    title: 'Sistemas personalizados',
-    desc: 'Desenvolvimento de sistemas personalizados para atender a estratégia e processos operacionais.',
-    icon: Laptop,
-    color: 'text-cyan-400',
-    bg: 'bg-cyan-400/10',
-    border: 'border-cyan-400/30',
+    title: 'Desenvolvimento de sistemas personalizados',
+    desc: 'Criamos soluções digitais alinhadas à operação, à estratégia e à rotina da equipe.',
+    pos: { x: 85, y: 25 },
+    icon: Code2,
   },
   {
     id: 6,
-    title: 'Insight e indicadores',
-    desc: 'Insight e desenvolvimento de indicadores.',
-    icon: Lightbulb,
-    color: 'text-blue-400',
-    bg: 'bg-blue-400/10',
-    border: 'border-blue-400/30',
+    title: 'Insight e desenvolvimento de indicadores',
+    desc: 'Convertimos dados em indicadores claros que revelam oportunidades e direcionam decisões.',
+    pos: { x: 35, y: 88 },
+    icon: LineChart,
   },
   {
     id: 7,
-    title: 'Painel de BI',
-    desc: 'Elaboração de painel de indicadores com BI.',
+    title: 'Elaboração de painel de indicadores com BI',
+    desc: 'Entregamos visibilidade executiva em tempo real para acompanhar o que realmente importa.',
+    pos: { x: 65, y: 88 },
     icon: PieChart,
-    color: 'text-violet-400',
-    bg: 'bg-violet-400/10',
-    border: 'border-violet-400/30',
   },
-]
-
-const nodes = [
-  { id: 1, x: 25, y: 25 },
-  { id: 2, x: 10, y: 50 },
-  { id: 3, x: 25, y: 75 },
-  { id: 4, x: 50, y: 50 },
-  { id: 5, x: 75, y: 25 },
-  { id: 6, x: 90, y: 50 },
-  { id: 7, x: 75, y: 75 },
-]
+  {
+    id: 8,
+    title: 'Todos os serviços utilizando IA para auxiliar',
+    desc: 'Aplicamos IA em toda a jornada para acelerar análises, automatizar tarefas e ampliar resultados.',
+    pos: { x: 85, y: 75 },
+    icon: Bot,
+  },
+].sort((a, b) => a.id - b.id)
 
 export default function Metodologia() {
   const [activeStep, setActiveStep] = useState<number | null>(null)
+  const hubRef = useRef<HTMLDivElement>(null)
+
+  // Scroll Spy for Mobile
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = Number(entry.target.getAttribute('data-id'))
+            setActiveStep(id)
+          }
+        })
+      },
+      { rootMargin: '-40% 0px -40% 0px' },
+    )
+
+    const elements = document.querySelectorAll('.mobile-step-card')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollToHub = () => {
+    hubRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <div className="min-h-screen bg-[#0f172a] pt-28 pb-16 lg:pt-36 relative overflow-hidden font-sans">
-      {/* Background Orbs */}
-      <div className="absolute top-0 left-1/4 w-[30rem] h-[30rem] bg-blue-600/10 rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[25rem] h-[25rem] bg-[#f59e0b]/5 rounded-full blur-[100px] translate-y-1/4 pointer-events-none" />
+    <div className="min-h-screen bg-[#020617] text-slate-50 pt-28 pb-20 overflow-hidden font-sans selection:bg-cyan-500/30">
+      {/* Background Ambient Effects */}
+      <div className="absolute top-0 left-1/4 w-[40rem] h-[40rem] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[30rem] h-[30rem] bg-cyan-600/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 lg:px-6 relative z-10">
-        <div className="text-center mb-10 lg:mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">
-            Nossa{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-amber-300">
-              Metodologia
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Hero Section */}
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-6 animate-fade-in-up">
+            <Sparkles className="w-4 h-4" />
+            Metodologia Planettaweb
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6 tracking-tight animate-fade-in-up animation-delay-100">
+            Jornada das{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+              soluções
             </span>
           </h1>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Uma jornada interativa estruturada em 8 etapas essenciais para transformar os dados da
-            sua empresa em resultados tangíveis e inteligência competitiva.
+          <p className="text-lg md:text-xl text-slate-400 leading-relaxed mb-8 animate-fade-in-up animation-delay-200">
+            A Planettaweb transforma dores de negócio em solução com tecnologia e IA. Uma jornada
+            interativa em 8 etapas para gerar inteligência competitiva.
           </p>
+          <Button
+            onClick={scrollToHub}
+            className="rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold px-8 py-6 h-auto text-lg animate-fade-in-up animation-delay-200 transition-all hover:shadow-[0_0_20px_rgba(34,211,238,0.4)]"
+          >
+            Explore a jornada
+            <ArrowDown className="ml-2 w-5 h-5" />
+          </Button>
         </div>
 
-        <div className="flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 items-start">
-          {/* Right Side / Top Side: Interactive Brain */}
-          <div className="w-full lg:w-1/2 sticky top-[72px] lg:top-32 z-20 bg-[#0f172a]/95 lg:bg-transparent backdrop-blur-xl lg:backdrop-blur-none pb-6 pt-6 lg:pb-0 lg:pt-0 border-b border-white/5 lg:border-none -mx-4 px-4 lg:mx-0 lg:px-0 lg:h-[calc(100vh-16rem)] flex flex-col items-center justify-center rounded-b-3xl lg:rounded-none shadow-lg lg:shadow-none transition-all duration-300">
-            <div className="relative w-full max-w-[280px] sm:max-w-xs md:max-w-md aspect-square mx-auto">
-              {/* SVG Network Base */}
-              <svg
-                viewBox="0 0 100 100"
-                className="w-full h-full text-white/5 drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
-              >
-                {/* Brain Outline */}
-                <path
-                  d="M50 10 C25 5, 5 30, 10 55 C15 80, 35 95, 50 95 C65 95, 85 80, 90 55 C95 30, 75 5, 50 10 Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="0.5"
-                />
-                {/* Internal Connections */}
-                <path
-                  d="M50 10 L25 25 L10 50 L25 75 L50 95 L75 75 L90 50 L75 25 Z"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="0.5"
-                  strokeOpacity="0.5"
-                />
-                <path
-                  d="M25 25 L50 50 L75 25 M10 50 L50 50 L90 50 M25 75 L50 50 L75 75"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="0.5"
-                  strokeOpacity="0.5"
-                />
-              </svg>
+        {/* ----------------------------------------------------------------- */}
+        {/* DESKTOP HUB (Hidden on mobile)                                    */}
+        {/* ----------------------------------------------------------------- */}
+        <div
+          ref={hubRef}
+          className="hidden lg:block relative w-full max-w-[1200px] mx-auto h-[800px] mt-10"
+        >
+          {/* SVG Connections Canvas */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+            {/* Transversal AI Ring (Background Aura) */}
+            <ellipse
+              cx="50%"
+              cy="50%"
+              rx="38%"
+              ry="42%"
+              className="fill-none stroke-blue-500/10"
+              strokeWidth="2"
+              strokeDasharray="8 8"
+            />
 
-              {/* Glowing Nodes */}
-              {nodes.map((node) => {
-                const step = steps.find((s) => s.id === node.id)
-                const isActive = activeStep === node.id
-                return (
-                  <div
-                    key={node.id}
-                    className={cn(
-                      'absolute w-5 h-5 -ml-2.5 -mt-2.5 rounded-full transition-all duration-500 flex items-center justify-center cursor-pointer',
-                      isActive
-                        ? `bg-current shadow-[0_0_25px_currentColor] scale-150 z-30 ${step?.color}`
-                        : 'bg-white/10 hover:bg-white/30 z-20 hover:scale-125',
-                    )}
-                    style={{ left: `${node.x}%`, top: `${node.y}%` }}
-                    onMouseEnter={() => setActiveStep(node.id)}
-                    onMouseLeave={() => setActiveStep(null)}
-                  >
-                    {isActive && (
-                      <div className="absolute inset-0 rounded-full animate-ping opacity-75 bg-current" />
-                    )}
-                    <span className="text-[10px] font-bold text-white/90 absolute">{node.id}</span>
-                  </div>
-                )
-              })}
-
-              {/* AI Core (Base) */}
-              <div className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
-                <div className="w-20 h-20 rounded-full bg-indigo-500/20 animate-pulse blur-xl absolute" />
-                <BrainCircuit className="w-8 h-8 text-indigo-400 relative z-10 opacity-70" />
-              </div>
-            </div>
-            <p className="mt-4 text-xs sm:text-sm text-slate-400 lg:hidden text-center max-w-xs px-4">
-              Explore o gráfico ou selecione as etapas abaixo.
-            </p>
-          </div>
-
-          {/* Left Side: Step Cards */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-4 relative z-10 lg:pb-12">
-            {steps.map((step) => {
-              const Icon = step.icon
+            {/* Lines from center to cards */}
+            {stepsData.map((step) => {
               const isActive = activeStep === step.id
               return (
-                <div
-                  key={step.id}
+                <line
+                  key={`line-${step.id}`}
+                  x1="50%"
+                  y1="50%"
+                  x2={`${step.pos.x}%`}
+                  y2={`${step.pos.y}%`}
                   className={cn(
-                    'p-5 md:p-6 rounded-2xl border transition-all duration-500 cursor-pointer backdrop-blur-sm relative overflow-hidden group',
-                    isActive
-                      ? `bg-[#1e3a8a]/40 ${step.border} shadow-lg transform lg:translate-x-4`
-                      : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20',
+                    'transition-all duration-500',
+                    isActive ? 'stroke-cyan-400' : 'stroke-slate-700/50',
                   )}
-                  onMouseEnter={() => setActiveStep(step.id)}
-                  onMouseLeave={() => setActiveStep(null)}
-                  onClick={() => setActiveStep(isActive ? null : step.id)}
+                  strokeWidth={isActive ? '3' : '1.5'}
+                  style={{
+                    filter: isActive ? 'drop-shadow(0 0 8px rgba(34,211,238,0.8))' : 'none',
+                  }}
+                />
+              )
+            })}
+          </svg>
+
+          {/* Central Brain Hub */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center pointer-events-none">
+            <div className="relative w-40 h-40 flex items-center justify-center">
+              <div
+                className="absolute inset-0 rounded-full bg-cyan-500/20 animate-ping blur-xl"
+                style={{ animationDuration: '3s' }}
+              />
+              <div className="absolute inset-4 rounded-full bg-blue-600/30 blur-lg" />
+              <div className="relative z-10 w-28 h-28 rounded-full bg-slate-950 border border-cyan-500/50 shadow-[0_0_40px_rgba(34,211,238,0.3)] flex items-center justify-center overflow-hidden backdrop-blur-md">
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-blue-600/20" />
+                <BrainCircuit className="w-14 h-14 text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+              </div>
+            </div>
+            <div className="mt-6 px-5 py-2 rounded-full bg-slate-900/80 border border-cyan-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)]">
+              <span className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-400 tracking-wider uppercase">
+                IA Transversal
+              </span>
+            </div>
+          </div>
+
+          {/* Methodology Cards */}
+          {stepsData.map((step) => {
+            const isActive = activeStep === step.id
+            const Icon = step.icon
+            return (
+              <div
+                key={`desktop-card-${step.id}`}
+                className={cn(
+                  'absolute -translate-x-1/2 -translate-y-1/2 w-[280px] transition-all duration-500 z-10 cursor-pointer group',
+                  isActive ? 'scale-105 z-50' : 'scale-100 hover:z-40',
+                )}
+                style={{ left: `${step.pos.x}%`, top: `${step.pos.y}%` }}
+                onMouseEnter={() => setActiveStep(step.id)}
+                onMouseLeave={() => setActiveStep(null)}
+              >
+                <div
+                  className={cn(
+                    'p-5 rounded-2xl backdrop-blur-xl border transition-all duration-500 shadow-2xl relative overflow-hidden',
+                    isActive
+                      ? 'bg-slate-800/90 border-cyan-400/50 shadow-[0_0_30px_rgba(34,211,238,0.15)]'
+                      : 'bg-slate-900/60 border-white/10 hover:bg-slate-800/70 hover:border-white/20',
+                  )}
                 >
-                  {/* Subtle hover gradient */}
+                  {/* Highlight gradient on active */}
                   <div
                     className={cn(
-                      'absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-transparent to-transparent pointer-events-none',
-                      isActive ? step.bg : '',
+                      'absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 transition-opacity duration-500 pointer-events-none',
+                      isActive && 'opacity-100',
                     )}
                   />
 
-                  <div className="flex items-start gap-4 relative z-10">
-                    <div
-                      className={cn(
-                        'p-3 rounded-xl shrink-0 transition-colors duration-300',
-                        isActive ? step.bg : 'bg-white/5 group-hover:bg-white/10',
-                      )}
-                    >
-                      <Icon
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-4">
+                      <div
                         className={cn(
-                          'w-6 h-6',
-                          isActive ? step.color : 'text-slate-400 group-hover:text-slate-200',
+                          'w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-300',
+                          isActive
+                            ? 'bg-cyan-500/20 text-cyan-300'
+                            : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-slate-300',
                         )}
-                      />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span
-                          className={cn(
-                            'text-xs font-bold px-2 py-0.5 rounded-full bg-white/10',
-                            isActive ? step.color : 'text-slate-400',
-                          )}
-                        >
-                          Passo {step.id}
-                        </span>
+                      >
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1 pt-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/10 text-slate-300">
+                            Etapa {step.id}
+                          </span>
+                        </div>
                         <h3
                           className={cn(
-                            'text-lg font-bold transition-colors',
-                            isActive ? 'text-white' : 'text-slate-200',
+                            'font-bold leading-snug transition-colors text-[15px]',
+                            isActive ? 'text-white' : 'text-slate-200 group-hover:text-white',
                           )}
                         >
                           {step.title}
                         </h3>
                       </div>
-                      <p
+                    </div>
+
+                    {/* Expandable Description */}
+                    <div
+                      className={cn(
+                        'grid transition-all duration-500 ease-in-out',
+                        isActive
+                          ? 'grid-rows-[1fr] opacity-100 mt-4'
+                          : 'grid-rows-[0fr] opacity-0 mt-0',
+                      )}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="text-sm text-slate-300 leading-relaxed border-t border-white/10 pt-3">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* ----------------------------------------------------------------- */}
+        {/* MOBILE & TABLET HUB (Hidden on desktop)                           */}
+        {/* ----------------------------------------------------------------- */}
+        <div className="lg:hidden relative pb-20">
+          {/* Sticky Brain Header */}
+          <div className="sticky top-[72px] z-40 py-6 bg-slate-950/80 backdrop-blur-xl border-b border-white/5 flex flex-col items-center justify-center mb-8 shadow-lg">
+            <div className="relative w-16 h-16 flex items-center justify-center">
+              <div
+                className="absolute inset-0 rounded-full bg-cyan-500/20 animate-ping blur-md"
+                style={{ animationDuration: '3s' }}
+              />
+              <div className="relative z-10 w-12 h-12 rounded-full bg-slate-900 border border-cyan-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                <BrainCircuit className="w-6 h-6 text-cyan-300" />
+              </div>
+            </div>
+            <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mt-3">
+              IA Transversal
+            </div>
+          </div>
+
+          {/* Cards List */}
+          <div className="relative flex flex-col gap-6 max-w-md mx-auto">
+            {/* Continuous Vertical AI Line */}
+            <div className="absolute left-[39px] top-6 bottom-6 w-1 rounded-full bg-gradient-to-b from-blue-500/20 via-cyan-500/30 to-purple-500/20" />
+
+            {stepsData.map((step) => {
+              const isActive = activeStep === step.id
+              const Icon = step.icon
+              return (
+                <div
+                  key={`mobile-card-${step.id}`}
+                  data-id={step.id}
+                  className="mobile-step-card relative flex gap-5 items-start px-2 group cursor-pointer"
+                  onClick={() => setActiveStep(isActive ? null : step.id)}
+                >
+                  {/* Connection Node */}
+                  <div
+                    className={cn(
+                      'relative z-10 w-11 h-11 rounded-full border-4 flex items-center justify-center shrink-0 transition-all duration-500 mt-1',
+                      isActive
+                        ? 'border-cyan-400 bg-slate-900 shadow-[0_0_20px_rgba(34,211,238,0.5)] text-cyan-400'
+                        : 'border-slate-800 bg-slate-950 text-slate-500 group-hover:border-slate-700',
+                    )}
+                  >
+                    <span className="text-sm font-bold">{step.id}</span>
+                  </div>
+
+                  {/* Card Content */}
+                  <div
+                    className={cn(
+                      'flex-1 p-5 rounded-2xl border transition-all duration-500 backdrop-blur-md',
+                      isActive
+                        ? 'bg-slate-800/80 border-cyan-500/40 shadow-lg'
+                        : 'bg-white/5 border-white/10',
+                    )}
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <Icon
+                        className={cn('w-5 h-5', isActive ? 'text-cyan-400' : 'text-slate-400')}
+                      />
+                      <h3
                         className={cn(
-                          'text-sm sm:text-base transition-colors leading-relaxed',
-                          isActive ? 'text-slate-300' : 'text-slate-400',
+                          'text-[15px] font-bold leading-tight',
+                          isActive ? 'text-white' : 'text-slate-200',
                         )}
                       >
-                        {step.desc}
-                      </p>
+                        {step.title}
+                      </h3>
+                    </div>
+
+                    <div
+                      className={cn(
+                        'grid transition-all duration-500 ease-in-out',
+                        isActive
+                          ? 'grid-rows-[1fr] opacity-100 mt-3'
+                          : 'grid-rows-[0fr] opacity-0 mt-0',
+                      )}
+                    >
+                      <div className="overflow-hidden">
+                        <p className="text-sm text-slate-300 leading-relaxed border-t border-white/10 pt-3">
+                          {step.desc}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               )
             })}
-
-            {/* Step 8: AI Foundation Banner */}
-            <div className="mt-6 md:mt-8 p-6 md:p-8 rounded-3xl bg-gradient-to-br from-indigo-900/60 to-[#1e3a8a]/40 border border-indigo-500/40 relative overflow-hidden group backdrop-blur-md shadow-[0_0_30px_rgba(99,102,241,0.15)]">
-              <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
-              <div className="relative flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 z-10 text-center sm:text-left">
-                <div className="p-4 bg-indigo-500/20 rounded-2xl shrink-0 border border-indigo-500/30">
-                  <Sparkles className="w-8 h-8 md:w-10 md:h-10 text-indigo-400 animate-pulse" />
-                </div>
-                <div>
-                  <h3 className="text-xl md:text-2xl font-extrabold text-white mb-2 tracking-tight">
-                    Inteligência Artificial (IA)
-                  </h3>
-                  <p className="text-slate-300 text-sm md:text-base leading-relaxed">
-                    <strong className="text-indigo-300 font-semibold">Destaque transversal:</strong>{' '}
-                    Todos os serviços utilizando IA para auxiliar, atuando como alicerce para
-                    acelerar processos, otimizar análises profundas e trazer previsibilidade real
-                    para os resultados do seu negócio.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
