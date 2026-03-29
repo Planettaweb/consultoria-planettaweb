@@ -1,5 +1,8 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 
 const cases = [
   {
@@ -75,6 +78,19 @@ export function Portfolio() {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-12 md:mt-16 text-center">
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-white font-bold h-12 md:h-14 px-8 rounded-full shadow-md transition-all hover:-translate-y-1 hover:shadow-lg"
+          >
+            <Link to="/portfolio" className="inline-flex items-center">
+              Ver portfólio completo
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

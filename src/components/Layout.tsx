@@ -32,24 +32,27 @@ export function Layout() {
   }, [location])
 
   const navLinks = [
-    { name: 'Início', href: '#home' },
-    { name: 'Serviços', href: '#servicos' },
-    { name: 'Sobre', href: '#sobre' },
-    { name: 'Portfólio', href: '#portfolio' },
-    { name: 'Contato', href: '#contato' },
+    { name: 'Início', href: '/#home' },
+    { name: 'Serviços', href: '/#servicos' },
+    { name: 'Sobre', href: '/#sobre' },
+    { name: 'Portfólio', href: '/portfolio' },
+    { name: 'Contato', href: '/#contato' },
   ]
 
   const scrollToSection = (href: string) => {
     setIsOpen(false)
-    if (href.startsWith('#')) {
+    if (href.startsWith('/#')) {
       if (location.pathname !== '/') {
-        navigate('/' + href)
+        navigate(href)
       } else {
-        const element = document.querySelector(href)
+        const hash = href.replace('/', '')
+        const element = document.querySelector(hash)
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' })
         }
       }
+    } else {
+      navigate(href)
     }
   }
 
@@ -69,7 +72,7 @@ export function Layout() {
             onClick={(e) => {
               if (window.location.pathname === '/') {
                 e.preventDefault()
-                scrollToSection('#home')
+                scrollToSection('/#home')
               }
             }}
           >
@@ -98,7 +101,7 @@ export function Layout() {
             ))}
             <Button
               className="bg-[#f59e0b] hover:bg-[#d97706] text-white font-semibold border-none shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all rounded-full px-6"
-              onClick={() => scrollToSection('#contato')}
+              onClick={() => scrollToSection('/#contato')}
             >
               Entre em contato
             </Button>
@@ -129,7 +132,7 @@ export function Layout() {
                 <div className="mt-4 pt-8 border-t border-white/10">
                   <Button
                     className="bg-[#f59e0b] hover:bg-[#d97706] text-white w-full border-none h-12 text-lg rounded-full"
-                    onClick={() => scrollToSection('#contato')}
+                    onClick={() => scrollToSection('/#contato')}
                   >
                     Entre em contato
                   </Button>

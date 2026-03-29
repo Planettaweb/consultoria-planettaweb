@@ -2,10 +2,14 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, LayoutGrid } from 'lucide-react'
 
 export function Hero() {
-  const scrollToSection = (id: string) => {
-    const element = document.querySelector(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+  const scrollToSection = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      window.location.href = href
     }
   }
 
@@ -76,7 +80,7 @@ export function Hero() {
           <Button
             size="lg"
             variant="outline"
-            onClick={() => scrollToSection('#portfolio')}
+            onClick={() => scrollToSection('/portfolio')}
             className="border-white/30 text-white bg-white/5 sm:bg-transparent hover:bg-white/10 hover:text-white h-12 md:h-14 px-6 md:px-8 text-base md:text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 rounded-full group w-full sm:w-auto"
           >
             Ver Portfólio

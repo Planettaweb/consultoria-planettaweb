@@ -4,6 +4,8 @@ import NotFound from '@/pages/NotFound'
 import CriacaoDeSites from '@/pages/servicos/CriacaoDeSites'
 import SistemasParaInternet from '@/pages/servicos/SistemasParaInternet'
 import DataAnalysis from '@/pages/servicos/DataAnalysis'
+import Portfolio from '@/pages/Portfolio'
+import PortfolioMockup from '@/pages/PortfolioMockup'
 import { Layout } from '@/components/Layout'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -16,6 +18,8 @@ export default function App() {
           <Route path="/servicos/criacao-de-sites" element={<CriacaoDeSites />} />
           <Route path="/servicos/sistemas-para-internet" element={<SistemasParaInternet />} />
           <Route path="/servicos/data-analysis-ia-bi" element={<DataAnalysis />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/:id" element={<PortfolioMockup />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
