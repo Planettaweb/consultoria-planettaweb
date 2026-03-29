@@ -6,6 +6,7 @@ import SistemasParaInternet from '@/pages/servicos/SistemasParaInternet'
 import DataAnalysis from '@/pages/servicos/DataAnalysis'
 import Portfolio from '@/pages/Portfolio'
 import PortfolioMockup from '@/pages/PortfolioMockup'
+import Metodologia from '@/pages/Metodologia'
 import { Layout } from '@/components/Layout'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/servicos/data-analysis-ia-bi" element={<DataAnalysis />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/:id" element={<PortfolioMockup />} />
+          <Route path="/metodologia" element={<Metodologia />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

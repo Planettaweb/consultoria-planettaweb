@@ -36,6 +36,7 @@ export function Layout() {
     { name: 'Serviços', href: '/#servicos' },
     { name: 'Sobre', href: '/#sobre' },
     { name: 'Portfólio', href: '/portfolio' },
+    { name: 'Metodologia', href: '/metodologia' },
     { name: 'Contato', href: '/#contato' },
   ]
 
