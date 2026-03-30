@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import {
-  // BrainCircuit,
   Activity,
   Workflow,
   Target,
@@ -187,8 +186,6 @@ export default function Metodologia() {
               <div className="absolute inset-4 rounded-full bg-blue-600/30 blur-lg" />
               <div className="relative z-10 w-28 h-28 rounded-full bg-slate-950 border border-cyan-500/50 shadow-[0_0_40px_rgba(34,211,238,0.3)] flex items-center justify-center overflow-hidden backdrop-blur-md">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-blue-600/20" />
-                //{' '}
-                <BrainCircuit className="w-14 h-14 text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
                 <img
                   src="https://planettaweb.com.br/home/assets/cerebro.png"
                   alt="Cérebro IA"
@@ -297,7 +294,6 @@ export default function Metodologia() {
                 style={{ animationDuration: '3s' }}
               />
               <div className="relative z-10 w-12 h-12 rounded-full bg-slate-900 border border-cyan-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-                // <BrainCircuit className="w-6 h-6 text-cyan-300" />
                 <img
                   src="https://planettaweb.com.br/home/assets/cerebro.png"
                   alt="Cérebro IA"
