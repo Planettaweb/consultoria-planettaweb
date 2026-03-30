@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import {
-  BrainCircuit,
+  // BrainCircuit,
   Activity,
   Workflow,
   Target,
@@ -187,7 +187,13 @@ export default function Metodologia() {
               <div className="absolute inset-4 rounded-full bg-blue-600/30 blur-lg" />
               <div className="relative z-10 w-28 h-28 rounded-full bg-slate-950 border border-cyan-500/50 shadow-[0_0_40px_rgba(34,211,238,0.3)] flex items-center justify-center overflow-hidden backdrop-blur-md">
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 to-blue-600/20" />
+                //{' '}
                 <BrainCircuit className="w-14 h-14 text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+                <img
+                  src="https://planettaweb.com.br/home/assets/cerebro.png"
+                  alt="Cérebro IA"
+                  className="w-14 h-14 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]"
+                />
               </div>
             </div>
             <div className="mt-6 px-5 py-2 rounded-full bg-slate-900/80 border border-cyan-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(34,211,238,0.15)]">
@@ -291,7 +297,12 @@ export default function Metodologia() {
                 style={{ animationDuration: '3s' }}
               />
               <div className="relative z-10 w-12 h-12 rounded-full bg-slate-900 border border-cyan-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.3)]">
-                <BrainCircuit className="w-6 h-6 text-cyan-300" />
+                // <BrainCircuit className="w-6 h-6 text-cyan-300" />
+                <img
+                  src="https://planettaweb.com.br/home/assets/cerebro.png"
+                  alt="Cérebro IA"
+                  className="w-6 h-6"
+                />
               </div>
             </div>
             <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest mt-3">
