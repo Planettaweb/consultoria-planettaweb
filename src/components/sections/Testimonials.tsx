@@ -7,7 +7,7 @@ const testimonials = [
     name: 'Roberto Almeida',
     role: 'Diretor de Tecnologia, RetailPro',
     content:
-      'A parceria com a TechDados transformou nossa operação. Os dashboards implementados nos deram uma visão clara do negócio em tempo real.',
+      'A parceria com a Planettaweb transformou nossa operação. Os dashboards implementados nos deram uma visão clara do negócio em tempo real.',
     avatar: 'https://img.usecurling.com/ppl/thumbnail?gender=male&seed=1',
   },
   {
